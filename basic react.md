@@ -136,5 +136,14 @@ Stateful means the component stores and manages its own data using state.
 "Props are used to pass data from a parent component to a child component, and they are read-only. State is used to store and manage data within a component, and it can be updated using hooks like useState. Props are controlled by the parent, whereas state is controlled by the component itself.
 ```
 
+```
+Is render() mandatory in Class Components?
 
+✅ Yes, render() is mandatory in class components.
 
+Because the render() method tells React what UI should be displayed on the screen.
+It returns the JSX/UI to display.
+React calls render() whenever props or state change
+
+Without render(), React doesn't know what to show.
+In functional components, we don't need a render() method because the function itself returns the UI.
