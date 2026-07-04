@@ -3,20 +3,124 @@
 
 ## Theory Questions
 what is javascript?
-1. Definition
+1. Definition-
 JavaScrip is a high-level, interpreted, and single-threaded programming language.
-2. Main Purpose
+2. Main Purpose-
 It is used to create interactive and dynamic web applications.
-3. Where It Runs
+3. Where It Runs-
 Earlier, it was used only in browsers, but now with Node.js, it can also run on the server side.
-4. Features
+4. Features-
 It supports object-oriented, functional, and event-driven programming.
-5. Real Project Usage
+5. Real Project Usage-
 In projects, I have used it for DOM manipulation, API calls, asynchronous programming, and performance optimization.
+-High level-easy for humans to read, write, and understand.
+-interpreter-code is executed line by line by a program
+-single threaded-xecutes one task at a time.
+-----------------------------------------------------------------------------------------------
+🔥 followup question:
+If JavaScript is single-threaded, how does it handle asynchronous tasks?
+
+"JavaScript is single-threaded, which means it executes one task at a time using a single call stack.
+
+However, for asynchronous operations like API calls, timers, and DOM events, JavaScript uses Web APIs provided by the browser or APIs provided by Node.js.
+
+When an async operation starts, JavaScript sends that task to these APIs and continues executing the remaining code without waiting.
+
+Once the async task is completed, its callback is placed into the Callback Queue or Microtask Queue.
+
+The Event Loop continuously checks whether the Call Stack is empty. If it is empty, the Event Loop moves the callback from the queue to the Call Stack for execution.
+
+So, JavaScript remains single-threaded, but with the help of Web APIs and the Event Loop, it can handle asynchronous tasks efficiently without blocking the application.
+-------------------------------------------------------------------------------------------------
+```
+💻 Example
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Hello");
+}, 2000);
+
+console.log("End");
+Output
+Start
+End
+Hello
+
+```
+🔥 Follow-up Question
+Why do Promises execute before setTimeout?
+
+Example:
+
+console.log(1);
+
+setTimeout(() => console.log(2), 0);
+
+Promise.resolve().then(() => console.log(3));
+
+console.log(4);
+
+Output:
+
+1
+4
+3
+2
+Reason:
+Promise callbacks go to the Microtask Queue.
+setTimeout callbacks go to the Callback (Macrotask) Queue.
+The Event Loop always executes Microtasks before Macrotasks.
+The Event Loop always gives higher priority to the Microtask Queue. It first executes all microtasks and only then processes the macrotasks.  
+So, even if setTimeout has a delay of 0 milliseconds, the Promise callback runs first."
 
 -------------------------------------------------------------------------------------
-1. What is JavaScript Execution Context?
+1. What is JavaScript Execution Context?  
+
+"Execution Context is the environment where JavaScript code is executed. It contains all the information needed to run the code, such as variables, functions, and the value of this.
+
+Whenever a JavaScript program starts or a function is called, JavaScript creates a new execution context for it.
+
+Each execution context goes through two phases: the Creation Phase and the Execution Phase.
+
+During the Creation Phase, memory is allocated for variables and functions, and the this keyword is initialized.
+
+During the Execution Phase, the code runs line by line, and values are assigned to variables and functions are executed.
+
+There are mainly two types of execution contexts: Global Execution Context and Function Execution Context."
+
+-------------------------------------------------------------------------------
+🔥 Types of Execution Context
+1. Global Execution Context (GEC)
+Created when the program starts.
+Created only once.
+this points to window in browsers.
+In the Global Execution Context, this points to the window object.
+this === window   // true
+Example:
+
+var a = 10;
+
+This runs inside the Global Execution Context.
+
+2. Function Execution Context (FEC)
+Created whenever a function is called.
+Every function call gets its own execution context.
+
+Example:
+
+function test() {
+    console.log("Hello");
+}
+
+test();
+
+Calling test() creates a new Function Execution Context.
+
+----------------------------------------------------------------------------------------
 2. Explain Global Execution Context and Function Execution Context.
+
+
+
 3. What happens during the Creation Phase and Execution Phase?
 4. What is Hoisting?
 5. Difference between `var`, `let`, and `const`?
