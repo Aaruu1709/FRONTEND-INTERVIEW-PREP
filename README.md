@@ -10,12 +10,15 @@ It is used to create interactive and dynamic web applications.
 3. Where It Runs-
 Earlier, it was used only in browsers, but now with Node.js, it can also run on the server side.
 4. Features-
-It supports object-oriented, functional, and event-driven programming.
+It supports object-oriented, functional, and event-driven programming(program execution depends on button click, keyboard input).
 5. Real Project Usage-
 In projects, I have used it for DOM manipulation, API calls, asynchronous programming, and performance optimization.
+Dom manupulation:changing or controlling HTML elements on a web page using JavaScript.
 -High level-easy for humans to read, write, and understand.
 -interpreter-code is executed line by line by a program
--single threaded-xecutes one task at a time.
+-single threaded-executes one task at a time.
+functional-Instead of writing the same code again and again, we put it inside a function and call it whenever we need it.or  it is reusable piece of code
+
 -----------------------------------------------------------------------------------------------
 🔥 followup question:
 If JavaScript is single-threaded, how does it handle asynchronous tasks?
@@ -31,6 +34,7 @@ Once the async task is completed, its callback is placed into the Callback Queue
 The Event Loop continuously checks whether the Call Stack is empty. If it is empty, the Event Loop moves the callback from the queue to the Call Stack for execution.
 
 So, JavaScript remains single-threaded, but with the help of Web APIs and the Event Loop, it can handle asynchronous tasks efficiently without blocking the application.
+
 -------------------------------------------------------------------------------------------------
 ```
 💻 Example
@@ -88,6 +92,13 @@ During the Execution Phase, the code runs line by line, and values are assigned 
 
 There are mainly two types of execution contexts: Global Execution Context and Function Execution Context."
 
+Every execution context stores:
+
+1. Variables
+2. Functions
+3. this keyword
+4. Scope information
+
 -------------------------------------------------------------------------------
 🔥 Types of Execution Context
 1. Global Execution Context (GEC)
@@ -116,13 +127,152 @@ test();
 
 Calling test() creates a new Function Execution Context.
 
-----------------------------------------------------------------------------------------
+------------------------------internal representation:
+---------------------------------
+
+1️⃣ Global Execution Context (GEC)
+
+👉 Created only once when the program starts.
+
+Example:
+
+var a = 10;
+
+function greet() {
+    console.log("Hello");
+}
+
+JavaScript creates:
+
+Global Execution Context
+------------------------
+a = undefined
+greet = function
+this = window (browser)
+
+After that, the code starts executing.
+
+2️⃣ Function Execution Context (FEC)
+
+👉 Created every time a function is called.
+
+Example:
+
+function greet(name) {
+    console.log(name);
+}
+
+greet("Arti");
+
+When greet() is called:
+
+Function Execution Context
+--------------------------
+name = "Arti"
+this = window
+
+After the function finishes, this context is removed from the call stack.
+
+-----------------------------------------------------------------------------------------
 2. Explain Global Execution Context and Function Execution Context.
 
+"Global Execution Context is created when the JavaScript program starts and contains global variables, functions, and the global this object. 
 
+Function Execution Context is created whenever a function is called, and each function gets its own local variables, parameters, and this value. 
+After the function execution completes, its context is removed from the call stack."
+
+---------------------------------------------------------------
 
 3. What happens during the Creation Phase and Execution Phase?
+Every execution context in JavaScript goes through two phases: Creation Phase and Execution Phase.
+
+In the Creation Phase, JavaScript allocates memory for variables and functions and initializes the this keyword.   
+Variables declared with var get undefined, while function declarations are stored completely in memory.
+
+In the Execution Phase, JavaScript executes the code line by line, assigns actual values to variables, and runs function calls."
+
+💻 Example
+var a = 10;
+
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+🟢 Creation Phase
+
+JavaScript prepares memory:
+
+a = undefined
+greet = complete function
+this = window (in browser)
+
+No code is executed yet.
+
+🔵 Execution Phase
+
+Now JavaScript runs the code line by line:
+
+a = 10;
+greet();
+
+Output:
+
+Hello
+
+
+
+-------------------------------------------------------------------------------
 4. What is Hoisting?
+"Hoisting is a JavaScript behavior where variable and function declarations are moved to the top of their scope during the creation phase of the execution context.
+
+Because of this, we can access var variables before their declaration, but their value will be undefined.  
+Function declarations are completely hoisted, so we can call them before defining them in the code."  
+Example:  
+💻 Example 1: var
+console.log(a);
+
+var a = 10;
+Output:
+undefined
+Why?
+
+Internally, JavaScript treats it like:
+
+var a;      // Hoisted
+
+console.log(a); // undefined
+
+a = 10;
+💻 Example 2: Function Declaration
+greet();
+
+function greet() {
+    console.log("Hello");
+}
+Output:
+Hello
+
+Because the entire function is stored in memory during the creation phase.
+
+💻 Example 3: let and const
+console.log(name);
+
+let name = "Arti";
+Output:
+ReferenceError
+
+let and const are also hoisted, but they stay in the Temporal Dead Zone (TDZ) until their declaration is reached.  
+
+```
+Hoisting = Memory Allocation Before Execution  
+
+var    → undefined  
+function → complete function  
+let/const → TDZ (cannot access before declaration)
+```
+
+------------------------------------------------------------------------------
 5. Difference between `var`, `let`, and `const`?
 6. What is Temporal Dead Zone (TDZ)?
 7. What is Lexical Scope?
