@@ -88,6 +88,13 @@ Add employee
 Edit employee
 Delete employee
 Search/filter/sort
+Loading and error handling
+
+Phase 5 – Polish
+Responsive improvements
+Better spacing and typography
+Smooth hover effects
+Final UI review
 
 -------------------------------------------------------------------
 What is BrowserRouter?
@@ -122,9 +129,3 @@ Why menuItems array?
 Instead of hardcoding every menu item, we store them in an array and use .map() to render them dynamically. This makes the sidebar easier to maintain and extend.
 
 -------------------------------------------------------------------------------------------
-Loading and error handling
-Phase 5 – Polish
-Responsive improvements
-Better spacing and typography
-Smooth hover effects
-Final UI review
